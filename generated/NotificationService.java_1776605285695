@@ -1,0 +1,12 @@
+package sn.yaatout.gestioncourrier.service;
+
+import sn.yaatout.gestioncourrier.model.*;
+
+import java.util.List;
+
+public interface NotificationService {
+    void ajouter(Notification notification);
+    List<Notification> afficherTous();
+    List<Notification> afficherParStatut(String statut);
+    void supprimer(Long id);
+}
