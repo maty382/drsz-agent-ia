@@ -1,0 +1,44 @@
+package sn.yaatout.gestioncourrier.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import sn.yaatout.gestioncourrier.model.Notification;
+import sn.yaatout.gestioncourrier.repository.NotificationRepository;
+
+@Service
+public class NotificationServiceImpl implements NotificationService {
+
+    private final NotificationRepository notificationRepository;
+
+    public NotificationServiceImpl(NotificationRepository notificationRepository) {
+        this.notificationRepository = notificationRepository;
+    }
+
+    @Override
+    public void ajouter(Notification notification) {
+        notificationRepository.save(notification);
+    }
+
+    @Override
+    public List<Notification> afficherTous() {
+        return (List<Notification>) notificationRepository.findAll();
+    }
+
+    @Override
+    public List<Notification> afficherParStatut(String statut) {
+        return notificationRepository.findByStatut(statut);
+    }
+
+    @Override
+    public void supprimer(Long id) {
+        Optional<Notification> notificationOptional = notificationRepository.findById(id);
+        if (notificationOptional.isPresent()) {
+            notificationRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Notification non trouvée");
+        }
+    }
+}
