@@ -1,0 +1,57 @@
+package sn.yaatout.gestioncourrier;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "example_table")
+public class ExampleEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // ... propriétés, constructeurs, getters et setters ...
+}
+
+package sn.yaatout.gestioncourrier.repository;
+
+import sn.yaatout.gestioncourrier.ExampleEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ExampleRepository extends JpaRepository<ExampleEntity, Long> {
+}
+
+package sn.yaatout.gestioncourrier.service;
+
+import sn.yaatout.gestioncourrier.ExampleEntity;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ExampleService {
+    // ... méthodes de service ...
+}
+
+package sn.yaatout.gestioncourrier.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import sn.yaatout.gestioncourrier.ExampleEntity;
+import sn.yaatout.gestioncourrier.repository.ExampleRepository;
+
+@RestController
+@RequestMapping("/api/examples")
+public class ExampleController {
+    private final ExampleRepository exampleRepository;
+
+    @Autowired
+    public ExampleController(ExampleRepository exampleRepository) {
+        this.exampleRepository = exampleRepository;
+    }
+
+    // ... méthodes de contrôleurs REST ...
+}
