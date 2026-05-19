@@ -1,0 +1,19 @@
+package sn.yaatout.gestioncourrier;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "courriels")
+public class CourrielEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String adresse_email_expediteur;
+    private String sujet;
+    private String corps;
+    private Date date_envoi;
+
+    // Constructeurs, getters et setters
+}
