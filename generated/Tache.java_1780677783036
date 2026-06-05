@@ -1,0 +1,75 @@
+package sn.yaatout.gestioncourrier;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "TACHE")
+public class Tache implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // propriétés de la classe Tache
+
+}
+
+package sn.yaatout.gestioncourrier.repository;
+
+import sn.yaatout.gestioncourrier.Tache;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TacheRepository extends JpaRepository<Tache, Long> {
+}
+
+package sn.yaatout.gestioncourrier.service;
+
+import sn.yaatout.gestioncourrier.Tache;
+import java.util.List;
+
+public interface TacheService {
+    List<Tache> findAll();
+    Tache findById(Long id);
+    Tache save(Tache tache);
+    void deleteById(Long id);
+}
+
+package sn.yaatout.gestioncourrier.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import sn.yaatout.gestioncourrier.Tache;
+import sn.yaatout.gestioncourrier.service.TacheService;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/taches")
+public class TacheController {
+    @Autowired
+    private TacheService tacheService;
+
+    @GetMapping("")
+    public ResponseEntity<List<Tache>> findAll() {
+        return ResponseEntity.ok(tacheService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Tache> findById(@PathVariable Long id) {
+        return ResponseEntity.ok(tacheService.findById(id));
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Tache> save(@RequestBody Tache tache) {
+        return ResponseEntity.ok(tacheService.save(tache));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Long id) {
+        tacheService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+}
