@@ -1,0 +1,65 @@
+package sn.yaatout.gestioncourrier;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+
+@Entity
+@Table(name = "client")
+public class Client implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nom;
+    private String prenom;
+    private Date dateNaissance;
+
+    // constructeurs, getters et setters
+}
+
+package sn.yaatout.gestioncourrier.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import sn.yaatout.gestioncourrier.entity.Client;
+
+public interface ClientRepository extends JpaRepository<Client, Long> {
+}
+
+package sn.yaatout.gestioncourrier.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import sn.yaatout.gestioncourrier.entity.Client;
+import sn.yaatout.gestioncourrier.repository.ClientRepository;
+
+@Service
+public class ClientService {
+    private final ClientRepository clientRepository;
+
+    @Autowired
+    public ClientService(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
+
+    // services methods
+}
+
+package sn.yaatout.gestioncourrier.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import sn.yaatout.gestioncourrier.entity.Client;
+import sn.yaatout.gestioncourrier.service.ClientService;
+
+@RestController
+@RequestMapping("/clients")
+public class ClientController {
+    private final ClientService clientService;
+
+    @Autowired
+    public ClientController(ClientService clientService) {
+        this.clientService = clientService;
+    }
+
+    // rest api endpoints for clients
+}
