@@ -1,0 +1,62 @@
+package sn.yaatout.gestioncourrier;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "utilisateur")
+public class Utilisateur implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // autres champs, getters et setters
+}
+
+package sn.yaatout.gestioncourrier.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import sn.yaatout.gestioncourrier.entity.Utilisateur;
+
+public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> { }
+
+package sn.yaatout.gestioncourrier.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UtilisateurService {
+
+    private final UtilisateurRepository utilisateurRepository;
+
+    @Autowired
+    public UtilisateurService(UtilisateurRepository utilisateurRepository) {
+        this.utilisateurRepository = utilisateurRepository;
+    }
+
+    // méthodes de service
+}
+
+package sn.yaatout.gestioncourrier.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RestController
+@RequestMapping("/api/utilisateur")
+public class UtilisateurController {
+
+    private final UtilisateurService utilisateurService;
+
+    @Autowired
+    public UtilisateurController(UtilisateurService utilisateurService) {
+        this.utilisateurService = utilisateurService;
+    }
+
+    // méthodes de contrôleur
+}
