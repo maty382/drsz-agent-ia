@@ -1,0 +1,70 @@
+package sn.yaatout.gestioncourrier;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "table_name")
+public class EntityName implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // Ajoutez ici les autres champs de votre entité
+
+}
+
+package sn.yaatout.gestioncourrier.repository;
+
+import sn.yaatout.gestioncourrier.EntityName;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface EntityNameRepository extends JpaRepository<EntityName, Long> {
+}
+
+package sn.yaatout.gestioncourrier.service;
+
+import sn.yaatout.gestioncourrier.EntityName;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class EntityNameService {
+
+    private final EntityNameRepository entityNameRepository;
+
+    public EntityNameService(EntityNameRepository entityNameRepository) {
+        this.entityNameRepository = entityNameRepository;
+    }
+
+    // Ajoutez ici les méthodes de votre service
+
+}
+
+package sn.yaatout.gestioncourrier.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import sn.yaatout.gestioncourrier.EntityName;
+import sn.yaatout.gestioncourrier.service.EntityNameService;
+
+@RestController
+@RequestMapping("/api/entity_name")
+public class EntityNameController {
+
+    private final EntityNameService entityNameService;
+
+    @Autowired
+    public EntityNameController(EntityNameService entityNameService) {
+        this.entityNameService = entityNameService;
+    }
+
+    // Ajoutez ici les méthodes de votre controller
+
+}
